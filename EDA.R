@@ -2,18 +2,19 @@
 # load data
 # =======================================================
 setwd('/Users/apple/Desktop/CEGE0042_R/CEGE0042_STDM_PROJECT')
-df <- read.csv('Data/Utah_Traffic.csv')
-df_meta <- read.csv('Data/Utah_Traffic_Meta.csv')
+df <- read.csv('Data/N_Utah_Traffic.csv')
+df_meta <- read.csv('Data/N_Utah_Traffic_Meta.csv')
 # setting the first col(time) as indexes
 row.names(df) <- df$X
 df$X <- NULL
+names(df) <- substring(names(df),2)
 
 
-names(df) <- substring(names(df),3)
 # transpose df and make it into matrix
 traf_matrix <- t(df)
-# replace the NaN data as )
-traf_matrix[is.na(traf_matrix)]<-0
+# replace the NaN data with mean in the location )
+
+ 
 # adding lat and long to traf_matrix
 station <- as.numeric(rownames(traf_matrix))
 long <- df_meta$longitude[station == df_meta$station_id]
@@ -93,6 +94,22 @@ x_labels <- seq(as.POSIXct("2022-01-01 00:00:00"), as.POSIXct("2022-01-31 23:00:
 x_ticks <- seq(0,750,25)
 axis(1, at = x_ticks, labels=x_labels)
 # a regular fluctuation in temporal aspect can be observed.
+
+
+
+
+# =======================================================
+# data mapping
+# =======================================================
+
+
+
+
+# =======================================================
+# view the lagged variables
+# =======================================================
+UTMeanTraf <- colMeans(df[,5:ncol(df)])
+UTLagged <- data.frame(hour=as.POSIXct('2022-01-01 00:00:00'):as.POSIXct())
 
 
 
