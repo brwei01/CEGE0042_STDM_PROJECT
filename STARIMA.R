@@ -12,7 +12,8 @@ library(knitr)
 # ===============================================================
 # Load data
 # ===============================================================
-setwd('/Users/apple/Desktop/CEGE0042_R/CEGE0042_STDM_PROJECT')
+current_directory <- getwd()
+setwd(current_directory)
 source("Packages/starima_package.R")
 df <- read.table('Data/C_Utah_Traffic.csv', header = TRUE, sep = ",")
 

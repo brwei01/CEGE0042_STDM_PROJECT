@@ -13,7 +13,8 @@ library(spacetime)
 # =======================================================
 # load data
 # =======================================================
-setwd('/Users/apple/Desktop/CEGE0042_R/CEGE0042_STDM_PROJECT')
+current_directory <- getwd()
+setwd(current_directory)
 df <- read.csv('Data/C_Utah_Traffic.csv')
 
 traf_matrix <- data.matrix(df[,5:ncol(df)])

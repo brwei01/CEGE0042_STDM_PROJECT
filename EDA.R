@@ -1,7 +1,8 @@
 # =======================================================
 # load data
 # =======================================================
-setwd('/Users/apple/Desktop/CEGE0042_R/CEGE0042_STDM_PROJECT')
+current_directory <- getwd()
+setwd(current_directory)
 df <- read.csv('Data/N_Utah_Traffic.csv')
 df_meta <- read.csv('Data/Utah_Traffic_Meta.csv')
 # setting the first col(time) as indexes
@@ -29,7 +30,6 @@ write.csv(traf_matrix, file='Data/C_Utah_Traffic.csv')
 # =======================================================
 # load the new data with locations affiliated 
 # =======================================================
-setwd('/Users/apple/Desktop/CEGE0042_R/CEGE0042_STDM_PROJECT')
 df <- read.csv('Data/C_Utah_Traffic.csv')
 df_meta <- read.csv('Data/N_Utah_Traffic_Meta.csv')
 colnames(df)[5:ncol(df)] <- substring(colnames(df)[5:ncol(df)], 2)

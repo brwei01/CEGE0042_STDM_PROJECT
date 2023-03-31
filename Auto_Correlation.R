@@ -11,8 +11,8 @@ library(OpenStreetMap)
 library(spacetime)
 library(tmap)
 
-
-setwd('/Users/apple/Desktop/CEGE0042_R/CEGE0042_STDM_PROJECT')
+current_directory <- getwd()
+setwd(current_directory)
 df <- read.csv('Data/C_Utah_Traffic.csv')
 stations <- tm_shape(stations)
 traf_matrix <- data.matrix(df[,5:ncol(df)])
@@ -122,7 +122,6 @@ source("Packages/starima_package.R")
 W <- listw2mat(W)
 stacf(t(traf_matrix), W, 48)
 stpacf(t(uk_temp_matrix), Wmat, 4)
-
 
 
 
