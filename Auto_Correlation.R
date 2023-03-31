@@ -44,12 +44,16 @@ grid.arrange(p1,p2, nrow=1)
 # ==============================================================
 # calculate over higher lags -- plot an ACF
 # ==============================================================
-acf(meanTraf, lag.max = 48) 
+acf(meanTraf, lag.max = 48, main="ACF, all stations averaged") 
 # the smaller the lag, the greater the correlation
 # however negative correlation during night-time
+meanTraf_mat <- t(as.matrix(meanTraf))
+acf(colMeans(matrix(meanTraf_mat,24)), lag.max = 48, main="ACF, all stations averaged daily average") 
+acf(colMeans(matrix(meanTraf_mat,168)), lag.max = 48, main="ACF, all stations averaged weekly average") 
+
 
 acf(traf_matrix[1,], lag.max=48, main="ACF, station no.354")
-# An ACF plot is generated automatically when the function is run. 95% confidence intervals are placed on the plot,
+# An ACF plot is generated automatscally when the function is run. 95% confidence intervals are placed on the plot.
 
 # plot seasonal (daily) patterns
 acf(colMeans(matrix(traf_matrix[1,],24)), main="ACF, station no.354 daily average")
@@ -59,6 +63,8 @@ acf(colMeans(matrix(traf_matrix[1,],24)), main="ACF, station no.354 daily averag
 # ==============================================================
 # Partial Correlation Functions: plot a PACF
 # ==============================================================
+
+pacf(meanTraf_mat, lag.max=48, main="PACF, all stations averaged")
 
 pacf(traf_matrix[1,], lag.max=48, main="PACF, station no.354")
 
@@ -91,7 +97,6 @@ lm
 
 # ==============================================================
 # point data
-
 stations <- data.frame(cbind(df$long, df$lat))
 colnames(stations) <- c('easting','northing')
 coords <- SpatialPoints(stations)
@@ -114,7 +119,6 @@ plot(variogram(list(rowMeans(traf_matrix)), locations=coords_lst, alpha=c(0,45,9
 
 
 
-
 # ==============================================================
 # SPATIAL TEMPORAL AUTO CORRELATION
 # ==============================================================
@@ -128,6 +132,7 @@ stpacf(t(uk_temp_matrix), Wmat, 4)
 # ==============================================================
 # space-time semivariogram
 # Project the points to get spatial lags in metres
+'''
 pts <- SpatialPoints(coords, 
                      proj4string=CRS("+init=epsg:4326 +proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs +towgs84=0,0,0"))
 # hours to date format

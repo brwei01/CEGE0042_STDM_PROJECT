@@ -46,7 +46,7 @@ class(coords)
 # show points on map
 # ===============================================================
 tmap_mode("view")
-tm_shape(points) + tm_dots()
+tm_shape(points) + tm_dots(size=0.1, col="red")
 tmap_mode('plot')
 
 
